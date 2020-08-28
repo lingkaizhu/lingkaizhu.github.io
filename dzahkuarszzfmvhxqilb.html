@@ -1,0 +1,167 @@
+<html>
+
+<head>
+  <title>Signature Pad Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="./dzahkuarszzfmvhxqilb.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+    <!-- https://github.com/szimek/signature_pad -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
+</head>
+
+<body>
+  <h1>Signature Pad Demo</h1>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Step 1: lawyer fills the form
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          No content.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Step 2: app sends out link to sign
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          No content.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Step 3: client visits link, a document preview displays
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+
+          <h2>Please pull all the way down</h2> 
+
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Section for Review</h1>
+              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Section for Review</h1>
+              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Section for Review</h1>
+              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Section for Review</h1>
+              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Section for Review</h1>
+              <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Please Sign Below</h1>
+            </div>
+          </div>
+
+          <div id="signature-pad" class="signature-pad">
+    
+            <div class="signature-pad--body">
+              <canvas></canvas>
+            </div>
+            <div class="signature-pad--footer">
+              <div class="description">Sign above</div>
+        
+              <div class="signature-pad--actions">
+                <div>
+                  <button type="button" class="button clear" data-action="clear">Clear</button>
+                  <button type="button" class="button" data-action="change-color">Change color</button>
+                  <button type="button" class="button" data-action="undo">Undo</button>
+        
+                </div>
+                <div>
+                  <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+                  <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
+                  <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Step 4: Confirm and Save
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          No content.
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Source Code</h5>
+      <p class="card-text">
+        <a href="./dzahkuarszzfmvhxqilb.css">CSS</a>
+        - <a href="./dzahkuarszzfmvhxqilb.js">JS</a>
+        - <a href="./dzahkuarszzfmvhxqilb.html">HTML</a>
+      </p>
+      <h5 class="card-title">External Libraries</h5>
+      <p class="card-text">
+        jQuery - <a href="https://github.com/szimek/signature_pad">https://github.com/szimek/signature_pad</a>
+      </p>
+    </div>
+  </div>
+  <br/>
+
+
+  <script type="text/javascript" src="./dzahkuarszzfmvhxqilb.js"></script>
+
+</body>
+
+</html>

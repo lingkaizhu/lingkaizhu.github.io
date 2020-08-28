@@ -1,0 +1,165 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - master
+        - /rc-.*/
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10-browsers
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v1-dependencies-
+
+      # - run: yarn install
+
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
+
+      # # Unit test
+      # - run: yarn test --no-watch --no-progress --browsers=ChromeHeadlessCI
+      # # e2e test
+      # # - run: yarn e2e
+
+      # # Inject build number
+      # - run: echo "export const PWA_VERSION = '$CIRCLE_PREVIOUS_BUILD_NUM';" > shared/version.ts
+
+      - run:
+          name: Clone github.io
+          working_directory: ~/workdir
+          command: |
+            git clone --depth 1 https://${GITHUB_TOKEN}@github.com/lingkaizhu/lingkaizhu.github.io.git
+            cd ~/workdir/lingkai.zhu.github.io
+            ls ~/workdir/lingkai.zhu.github.io
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "${GITHUB_EMAIL}"
+            git config user.name "Deployment Bot"
+      - run:
+          name: Rm existing site
+          working_directory: ~/workdir/lingkai.zhu.github.io
+          command: |
+            git rm -rf .
+      - run:
+          name: Copy
+          working_directory: ~/workdir/lingkai.zhu.github.io/
+          command: |
+            echo "Copying ..."
+            cp -a ~/repo/* .
+      # # Build home app
+      # - run:
+      #     name: Build home
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project home --base-href /home/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/home
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/home/. .
+      # # Build rich app
+      # - run:
+      #     name: Build rich
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project rich --base-href /rich/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/rich
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/rich/. .
+      # # Build weibull app
+      # - run:
+      #     name: Build weibull
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project weibull --base-href /obsolete/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/obsolete
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/weibull/. .
+      # # Build potato app
+      # - run:
+      #     name: Build potato
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project potato --base-href /potato/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/potato
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/potato/. .
+      # # Build chestnut app
+      # - run:
+      #     name: Build chestnut
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project chestnut --base-href /chestnut/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/chestnut
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/chestnut/. .
+      # # Build eee app
+      # - run:
+      #     name: Build eee
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project eee --base-href /icicle/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/icicle
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/eee/. .
+      # # Build salt app
+      # - run:
+      #     name: Build salt
+      #     working_directory: ~/repo
+      #     command: |
+      #       yarn build --prod --project salt --base-href /salt/
+      # - run:
+      #     name: Copy artifact
+      #     working_directory: ~/workdir/pigjr.github.io/salt
+      #     command: |
+      #       echo "Copying ..."
+      #       cp -a ~/repo/dist/salt/. .
+      # Deploy
+      - run:
+          name: Commit changes
+          working_directory: ~/workdir/lingkai.zhu.github.io
+          command: |
+            git add .
+            git commit --allow-empty -m "Trigger deployment"
+      - deploy:
+          name: Deploy
+          working_directory: ~/workdir/lingkai.zhu.github.io
+          command: |
+            # Push quietly to prevent showing the token in log
+            git push -q https://${GITHUB_TOKEN}@github.com/lingkaizhu/lingkaizhu.github.io.git master
